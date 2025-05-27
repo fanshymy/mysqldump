@@ -56,6 +56,10 @@ function resolveType(columnType: string): ColumnTypes {
         return 'STRING';
     }
 
+    if (jsonTypes.has(columnType)) {
+        return 'JSON';
+    }
+
     if (hexTypes.has(columnType)) {
         return 'HEX';
     }
