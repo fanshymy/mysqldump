@@ -24,9 +24,9 @@ const stringTypes = new Set([
     'longtext',
     'tinytext',
     'set',
-    'enum',
-    'json',
+    'enum'
 ]);
+const jsonTypes = new Set(['json']);
 const bitTypes = new Set(['bit']);
 const hexTypes = new Set([
     'blob',
