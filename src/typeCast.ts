@@ -172,7 +172,15 @@ function typeCast(tables: Array<Table>): (field: TypecastField) => string {
         } else if (columnType === 'STRING') {
             // sanitize the string types
             value = sqlstring.escape(field.string());
-        } else if (columnType === 'BIT') {
+        } else if (columnType === 'JSON') {
+            //处理json
+            const buf = field.buffer();
+            if (buf == null) {
+                value = null;
+            }else {
+                value = JSON.stringify(buf.toString())
+            }
+        }else if (columnType === 'BIT') {
             // bit fields have a binary representation we have to deal with
             const buf = field.buffer();
 
