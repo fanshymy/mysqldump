@@ -30,7 +30,13 @@ function buildInsert(
     return sql.replace(/NOFORMAT_WRAP\("##(.+?)##"\)/g, '$1');
 }
 function buildInsertValue(row: QueryRes, table: Table): string {
-    return `(${table.columnsOrdered.map(c => row[c]).join(',')})`;
+    //return `(${table.columnsOrdered.map(c => row[c]).join(',')})`;
+    return `(${table.columnsOrdered.map(c => {
+        if(typeof row[c] =='object' ){
+            return JSON.stringify(row[c])
+        }
+        return row[c]
+    }).join(',')})`;
 }
 
 function executeSql(connection: mysql.Connection, sql: string): Promise<void> {
